@@ -6,8 +6,7 @@ import path from "path";
 
 export default withAuth(
     function middleware(){
-        return NextResponse.next
-
+        return NextResponse.next()
     },
     {
         callbacks:{
