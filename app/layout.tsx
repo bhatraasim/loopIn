@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Providers from "./components/Providers";
+import Navbar from "./components/Navbar";
 
+import { Inter } from "next/font/google";
 
+const inter = Inter({ subsets: ["latin"] });
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,10 +31,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${inter.className} antialiased`}
       >
         <Providers>
-          <main className="container mx-auto  px-4 py-8" >{children}</main>
+          <Navbar />
+          <main className="w-screen h-screen" >{children}</main>
         </Providers>
         
       </body>

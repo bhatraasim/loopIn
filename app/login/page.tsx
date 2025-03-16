@@ -1,6 +1,7 @@
 "use client";
 
 import { signIn } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -29,7 +30,12 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center items-center h-screen">
+    <div className="">
+
+    
+    
+      <div className="flex justify-center items-center h-screen">
+      
       <fieldset className="w-96 bg-base-200 border border-base-300 p-6 rounded-lg shadow-lg">
         <h1 className="text-2xl font-bold text-center mb-4">🔐 Login</h1>
 
@@ -58,7 +64,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="btn btn-neutral w-full hover:bg-gray-700 transition"
+            className="btn bg-[#1C836D] w-full hover:bg-[#0BAACA] text-white transition "
           >
             Login
           </button>
@@ -72,6 +78,8 @@ const Login = () => {
         </p>
       </fieldset>
     </div>
+    </div>
+    
   );
 };
 

@@ -12,12 +12,12 @@ export default function ThemeToggle() {
   }, [theme]);
 
   const toggleTheme = () => {
-    setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    // setTheme((prevTheme) => (prevTheme === "light" ? "dark" : "light"));
+    setTheme("light")
   };
 
   return (
-    <button className="btn btn-outline" onClick={toggleTheme}>
-      {theme === "light" ? "🌙 Dark Mode" : "☀️ Light Mode"}
-    </button>
+    <>
+    </>
   );
 }

@@ -28,12 +28,4 @@ body {
 @import "tailwindcss";
 @plugin "daisyui";
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-}
-#__next {
-  margin: 0;
-  padding: 0;
-}
+
