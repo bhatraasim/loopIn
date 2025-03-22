@@ -1,4 +1,4 @@
-"use client";
+"use client"
 import { useSession, signIn, signOut } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
@@ -11,7 +11,7 @@ const Navbar = () => {
   const { data: session } = useSession();
 
   return (
-    <nav className="w-full px-5 py-3 bg-white shadow-sm flex justify-between items-center">
+    <nav className="fixed top-0 left-0 w-full px-5 py-3 bg-white shadow-sm flex justify-between items-center z-50">
       <ThemeToggle />
       {/* Logo */}
       <Link href="/">
@@ -22,7 +22,7 @@ const Navbar = () => {
       {session ? (
         <div className="flex justify-between  gap-140 font-medium">
           <div className="flex gap-10">
-            <div className="relative font-semibold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-blue-400 after:left-0 after:bottom-[-2px] after:scale-x-100 after:transition-transform after:duration-300 "><Link href={"/home"} > Home </Link></div>
+            <div className="relative font-semibold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-blue-400 after:left-0 after:bottom-[-2px] after:scale-x-100 after:transition-transform after:duration-300 "><Link href={"/"} > Home </Link></div>
             <div className="relative font-semibold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-blue-400 after:left-0 after:bottom-[-2px] after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"><Link href={"/home"}>Network </Link></div>
             <div className="relative font-semibold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-blue-400 after:left-0 after:bottom-[-2px] after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"><Link href={"/home"}>Events </Link></div>
           </div>
