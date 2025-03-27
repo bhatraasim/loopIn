@@ -26,7 +26,7 @@ const Navbar = () => {
         <div className="flex justify-between  gap-140 font-medium">
           <div className="flex gap-10">
             <div className="relative font-semibold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-blue-400 after:left-0 after:bottom-[-2px] after:scale-x-100 after:transition-transform after:duration-300 "><Link href={"/"} > Home </Link></div>
-            <div className="relative font-semibold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-blue-400 after:left-0 after:bottom-[-2px] after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"><Link href={"/home"}>Network </Link></div>
+            <div className="relative font-semibold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-blue-400 after:left-0 after:bottom-[-2px] after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"><Link href={"/network"}> Network </Link></div>
             <div className="relative font-semibold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-blue-400 after:left-0 after:bottom-[-2px] after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"><Link href={"/home"}>Events </Link></div>
           </div>
           <div className="flex gap-8 items-center"> 

@@ -7,6 +7,7 @@ import PostBox from "./components/PostBox";
 import Feed from "./components/Feed";
 import VideoUploadForm from "./components/VideoUpload";
 import { signOut } from "next-auth/react";
+import PeopleYouMightKnow from "./components/PeopleYouMightKnow";
 
 export default function Home() {
   const [videos, setVideos] = useState<IVideo[]>([])
@@ -49,6 +50,7 @@ export default function Home() {
               para={<span>People viewed your profile in the last 7 days: <strong>217</strong></span>} 
               btn_text="Premium" 
             />
+            <PeopleYouMightKnow />
           </div>
         </div>
       </div>

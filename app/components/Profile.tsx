@@ -3,13 +3,13 @@ import React from 'react';
 
 function Profile() {
   return (
-    <div className="dropdown dropdown-end">
+    <div className="dropdown dropdown-end ">
       <div 
         tabIndex={0} 
         role="button" 
-        className="btn btn-ghost btn-circle hover:bg-base-300 transition-all p-2"
+        className="btn btn-ghost btn-circle hover:bg-base-300 transition-all "
       >
-        <PersonStanding className="text-[#2A7F68] w-10 h-10 font-extrabold stroke-[3]" />
+        <PersonStanding className="text-[#2A7F68] font-extrabold stroke-[3]" />
       </div>
       <ul 
         tabIndex={0} 
@@ -19,7 +19,7 @@ function Profile() {
           <div className="w-14 h-14 rounded-full bg-[#2A7F68] flex items-center justify-center text-white text-2xl font-bold">
             RB
           </div>
-          <p className="mt-2 text-lg font-semibold">Rasim Bhat</p>
+          <p className="mt-2 text-lg font-semibold">Rasim Bhat</p>    
           <p className="text-sm text-gray-500">rasim@example.com</p>
         </li>
         <li>
