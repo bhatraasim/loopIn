@@ -29,8 +29,21 @@ export default function VideoUploadForm() {
     })
 
     const handleUploadSuccess = (response: IKUploadResponse) => {
-        setValue("videoUrl", response.url)
-        setValue("thumbnailUrl", response.thumbnailUrl || response.url)
+        const videoUrl = response.url;
+        const thumbnailUrl = response.thumbnailUrl || response.url;
+        
+        if (!videoUrl.startsWith('http')) {
+            setValue("videoUrl", `https://ik.imagekit.io/${process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY}/${videoUrl}`);
+        } else {
+            setValue("videoUrl", videoUrl);
+        }
+        
+        if (!thumbnailUrl.startsWith('http')) {
+            setValue("thumbnailUrl", `https://ik.imagekit.io/${process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY}/${thumbnailUrl}`);
+        } else {
+            setValue("thumbnailUrl", thumbnailUrl);
+        }
+        
         showNotification("Video uploaded successfully", "success")
     }
 
