@@ -14,14 +14,20 @@ export default withAuth(
                 const {pathname} = req.nextUrl
                 //allow  auth related routes 
                 if (
-                    pathname.startsWith("/api/auth") || pathname === "/login" || pathname === "/register"
+                    pathname.startsWith("/api/auth") || 
+                    pathname === "/login" || 
+                    pathname === "/register"
                 ) {
                     return true 
                 }
 
-                //public 
-                if (pathname === "/ " || pathname.startsWith("api/videos")) {
-                    return true ;
+                //public routes
+                if (
+                    pathname === "/" || 
+                    pathname.startsWith("/api/videos") ||
+                    pathname.startsWith("/api/users")
+                ) {
+                    return true;
                 }
 
                 return !!token

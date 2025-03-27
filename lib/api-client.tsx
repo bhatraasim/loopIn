@@ -1,3 +1,4 @@
+import { IUser } from "@/models/User";
 import { IVideo } from "@/models/Video";
 
 export type VideoFormData = Omit<IVideo, "_id">;
@@ -8,45 +9,43 @@ type FetchOptions = {
 }
 
 class ApiClient {
-    private async fetch<T>(
-        endpoint:string,
-        options:FetchOptions = {},
-
-
-    ){
-        const { method = "GET" , body ,  headers = {}} = options
-
-        const defaultHeaders = {
-            "Content-Type": "application/json",
-            ...headers,
-          };
-
-        const response = await fetch(`/api${endpoint}`, {
-            method,
-            headers: defaultHeaders,
-            body: body ? JSON.stringify(body) : undefined,
+    private async fetch<T>(url: string, options: RequestInit = {}): Promise<T> {
+        const response = await fetch(url, {
+            ...options,
+            headers: {
+                'Content-Type': 'application/json',
+                ...options.headers,
+            },
         });
 
-        if(!response.ok) {
-            throw new Error(await response.text());
+        if (!response.ok) {
+            const errorText = await response.text();
+            throw new Error(errorText);
         }
 
         return response.json();
+    }
 
+    // User related API calls
+    async getUsers(): Promise<IUser[]> {
+        return this.fetch<IUser[]>('/api/users');
+    }
 
+    // Video related API calls
+    async getVideos(): Promise<IVideo[]> {
+        return this.fetch<IVideo[]>('/api/videos');
     }
-    async getVideos() {
-        return this.fetch<IVideo[]>("/videos");
-    }
-    async getAVideo(id: string) {
-        return this.fetch<IVideo>(`/videos/${id}`);
-    }
-    async createVideo(videoData: VideoFormData) {
-        return this.fetch<IVideo>("/videos", {
-          method: "POST",
-          body: videoData,
+
+    async createVideo(data: Omit<IVideo, '_id'>): Promise<IVideo> {
+        return this.fetch<IVideo>('/api/videos', {
+            method: 'POST',
+            body: JSON.stringify(data),
         });
     }
 
+    async getAVideo(id: string) {
+        return this.fetch<IVideo>(`/videos/${id}`);
+    }
 }
+
 export const apiClient = new ApiClient();

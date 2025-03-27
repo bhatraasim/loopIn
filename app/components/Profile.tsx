@@ -1,4 +1,4 @@
-import { PersonStanding, User, LogOut, Settings } from 'lucide-react';
+import { User, LogOut, Settings } from 'lucide-react';
 import { useSession } from 'next-auth/react';
 import React from 'react';
 
@@ -23,7 +23,7 @@ function Profile() {
         role="button" 
         className="btn btn-ghost btn-circle hover:bg-base-300 transition-all "
       >
-        <PersonStanding className="text-[#2A7F68] font-extrabold stroke-[3]" />
+        <User className="text-[#2A7F68] font-extrabold stroke-[3]" />
       </div>
       <ul 
         tabIndex={0} 

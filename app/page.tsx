@@ -1,12 +1,10 @@
 "use client"
 import { apiClient } from "@/lib/api-client";
-import Video, { IVideo } from "@/models/Video";
+import { IVideo } from "@/models/Video";
 import { useEffect, useState } from "react";
 import Card_sm from "./components/Card-sm";
-import PostBox from "./components/PostBox";
 import Feed from "./components/Feed";
 import VideoUploadForm from "./components/VideoUpload";
-import { signOut } from "next-auth/react";
 import PeopleYouMightKnow from "./components/PeopleYouMightKnow";
 
 export default function Home() {
@@ -17,11 +15,11 @@ export default function Home() {
       try {
         const data = await apiClient.getVideos()
         setVideos(data)
-        console.log("Fetched videos:", data)
       } catch (error) {
         console.error("Failed to get videos:", error)
       }
     }
+    
 
     fetchVideos()
   }, [])
@@ -51,6 +49,7 @@ export default function Home() {
               btn_text="Premium" 
             />
             <PeopleYouMightKnow />
+            
           </div>
         </div>
       </div>

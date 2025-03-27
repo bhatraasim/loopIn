@@ -1,10 +1,10 @@
 import React from 'react'
-import PeopleYouMightKnow from '../components/PeopleYouMightKnow'
+import AllUsers from '../components/AllUsers'
 
 function page() {
   return (
     <div>
-      <PeopleYouMightKnow />
+      <AllUsers />
     </div>
   )
 }
