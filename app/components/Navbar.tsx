@@ -5,6 +5,9 @@ import Image from "next/image";
 import ThemeToggle from "./Mode_Button";
 import Input from "./Input";
 import { Bell, Bookmark, PersonStanding,Search } from "lucide-react";
+import Profile from "./Profile";
+
+
 
 
 const Navbar = () => {
@@ -26,11 +29,11 @@ const Navbar = () => {
             <div className="relative font-semibold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-blue-400 after:left-0 after:bottom-[-2px] after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"><Link href={"/home"}>Network </Link></div>
             <div className="relative font-semibold after:content-[''] after:absolute after:w-full after:h-[2px] after:bg-blue-400 after:left-0 after:bottom-[-2px] after:scale-x-0 after:transition-transform after:duration-300 hover:after:scale-x-100"><Link href={"/home"}>Events </Link></div>
           </div>
-          <div className="flex gap-8"> 
+          <div className="flex gap-8 items-center"> 
             <div className=""><Search /></div>
             <div className=""><Bookmark /></div>
             <div className=""> <Bell /></div>
-            <div className="mx-4"><PersonStanding /></div>
+            <div className="mx-4"><Profile /></div>
           </div>
         </div>
       ) : (

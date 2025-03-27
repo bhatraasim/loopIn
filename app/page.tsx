@@ -32,7 +32,6 @@ export default function Home() {
           {/* Main Content Area */}
           <div className="col-span-8">
             {/* Upload Form */}
-            <button onClick = { signOut }> Logout</button>
             <div className="bg-white rounded-xl shadow-sm mb-6">
               <VideoUploadForm />
             </div>
