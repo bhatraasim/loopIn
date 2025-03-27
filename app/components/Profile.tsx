@@ -1,7 +1,21 @@
 import { PersonStanding, User, LogOut, Settings } from 'lucide-react';
+import { useSession } from 'next-auth/react';
 import React from 'react';
 
 function Profile() {
+  const { data: session } = useSession();
+  function getUsernameFromEmail(email: string | null | undefined): string {
+    if (!email) return ""; // Handle null/undefined case
+    return email.split("@")[0];
+  }
+  function getInitials(name: string | null | undefined): string {
+    if (!name) return ""; // Handle null/undefined case
+    return name
+      .split(" ")
+      .map((word) => word[0])
+      .join("")
+      .toUpperCase();
+  }
   return (
     <div className="dropdown dropdown-end ">
       <div 
@@ -17,10 +31,10 @@ function Profile() {
       >
         <li className="flex flex-col items-center border-b pb-2 mb-2">
           <div className="w-14 h-14 rounded-full bg-[#2A7F68] flex items-center justify-center text-white text-2xl font-bold">
-            RB
+            {getInitials(session?.user.email)}
           </div>
-          <p className="mt-2 text-lg font-semibold">Rasim Bhat</p>    
-          <p className="text-sm text-gray-500">rasim@example.com</p>
+          <p className="mt-2 text-lg font-semibold">{getUsernameFromEmail(session?.user.email)}</p>    
+          <p className="text-sm text-gray-500">{session?.user.email}</p>
         </li>
         <li>
           <a className="flex items-center gap-2 hover:bg-[#2A7F68] hover:text-white rounded-md p-2 transition-all">
