@@ -46,6 +46,13 @@ class ApiClient {
     async getAVideo(id: string) {
         return this.fetch<IVideo>(`/videos/${id}`);
     }
+
+    async  changePassword(oldPassword:string , newPassword:string): Promise<{message:string}>{
+        return this.fetch('/api/users/changePassword' ,{
+            method:'POST',
+            body: JSON.stringify({ oldPassword, newPassword }),
+        })
+    }
 }
 
 export const apiClient = new ApiClient();

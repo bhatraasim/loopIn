@@ -1,8 +1,10 @@
-import { User, LogOut, Settings } from 'lucide-react';
+import { User, LogOut, Settings, PenLine } from 'lucide-react';
 import { signOut, useSession } from 'next-auth/react';
-import React from 'react';
+import React, { useState } from 'react';
+import BlurredCard from './ChangePassword';
 
 function Profile() {
+  const [showCard, setShowCard] = useState(false)
   const { data: session } = useSession();
   function getUsernameFromEmail(email: string | null | undefined): string {
     if (!email) return ""; // Handle null/undefined case
@@ -19,6 +21,8 @@ function Profile() {
   const handleLogout = () => {
     signOut({ callbackUrl: '/login' });
   };
+
+
   return (
     <div className="dropdown dropdown-end ">
       <div 
@@ -45,6 +49,11 @@ function Profile() {
           </a>
         </li>
         <li>
+        <a className="flex items-center gap-2 hover:bg-[#2A7F68] hover:text-white rounded-md p-2 transition-all">
+          <button className='flex gap-2 ' onClick={()=>setShowCard(true)}><PenLine /> Change password </button>
+        </a>
+        </li>
+        <li>
           <a className="flex items-center gap-2 hover:bg-gray-300 hover:text-black rounded-md p-2 transition-all">
             <Settings className="w-5 h-5" /> Settings
           </a>
@@ -55,6 +64,12 @@ function Profile() {
           </a>
         </li>
       </ul>
+      {showCard && (
+        <BlurredCard
+          title="Change passwrod"
+          onClose={() => setShowCard(false)}
+        />
+      )}
     </div>
   );
 }

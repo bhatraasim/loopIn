@@ -20,6 +20,21 @@ export default function Home() {
     })
     const router = useRouter()
 
+
+    useEffect(() => {
+      const fetchVideos = async () => {
+        try {
+          const data = await apiClient.getVideos()
+          setVideos(data)
+        } catch (error) {
+          console.error("Failed to get videos:", error)
+        }
+      }
+      
+  
+      fetchVideos()
+    }, [])
+    
     
       if (status === "unauthenticated") {
         router.replace("/login");
@@ -31,19 +46,6 @@ export default function Home() {
     }
     
 
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const data = await apiClient.getVideos()
-        setVideos(data)
-      } catch (error) {
-        console.error("Failed to get videos:", error)
-      }
-    }
-    
-
-    fetchVideos()
-  }, [])
   
   return (
     <div className="bg-[url('/bg-main.png')] bg-cover bg-center bg-fixed min-h-screen">
