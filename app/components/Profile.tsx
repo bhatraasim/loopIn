@@ -1,5 +1,5 @@
 import { User, LogOut, Settings } from 'lucide-react';
-import { useSession } from 'next-auth/react';
+import { signOut, useSession } from 'next-auth/react';
 import React from 'react';
 
 function Profile() {
@@ -16,6 +16,9 @@ function Profile() {
       .join("")
       .toUpperCase();
   }
+  const handleLogout = () => {
+    signOut({ callbackUrl: '/login' });
+  };
   return (
     <div className="dropdown dropdown-end ">
       <div 
@@ -48,7 +51,7 @@ function Profile() {
         </li>
         <li>
           <a className="flex items-center gap-2 hover:bg-red-400 hover:text-white rounded-md p-2 transition-all">
-            <LogOut className="w-5 h-5" /> Log Out
+            <button className='flex' onClick={handleLogout}> <LogOut className="w-5 h-5" /> Log Out</button>
           </a>
         </li>
       </ul>

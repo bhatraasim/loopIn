@@ -50,8 +50,6 @@ const Navbar = () => {
         </div>
       ) : (
         <div className="flex items-center gap-4 ">
-        <Input  placeholder="Email"/>
-        <Input placeholder="Password" />
         <Link href="/login">
           <button className="bg-[#0BAACA] text-white px-4 py-2 rounded-md hover:bg-[#60CDE3] transition h-12 w-20"
           >

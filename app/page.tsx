@@ -6,9 +6,30 @@ import Card_sm from "./components/Card-sm";
 import Feed from "./components/Feed";
 import VideoUploadForm from "./components/VideoUpload";
 import PeopleYouMightKnow from "./components/PeopleYouMightKnow";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 export default function Home() {
   const [videos, setVideos] = useState<IVideo[]>([])
+
+    const { data:session , status } = useSession({
+      required:true,
+      onUnauthenticated() {
+        window.location.href = "/login"
+      },
+    })
+    const router = useRouter()
+
+    
+      if (status === "unauthenticated") {
+        router.replace("/login");
+      }
+  
+    // Show loading state while checking authentication
+    if (status === "loading") {
+      return <div>Loading...</div>;
+    }
+    
 
   useEffect(() => {
     const fetchVideos = async () => {
