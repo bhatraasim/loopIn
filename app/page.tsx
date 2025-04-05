@@ -36,14 +36,14 @@ export default function Home() {
     }, [])
     
     
-      if (status === "unauthenticated") {
-        router.replace("/login");
-      }
+    //   if (status === "unauthenticated") {
+    //     router.replace("/login");
+    //   }
   
-    // Show loading state while checking authentication
-    if (status === "loading") {
-      return <div>Loading...</div>;
-    }
+    // // Show loading state while checking authentication
+    // if (status === "loading") {
+    //   return <div>Loading...</div>;
+    // }
     
 
   
