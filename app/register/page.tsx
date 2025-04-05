@@ -6,7 +6,7 @@ import { useNotification } from "../components/Notification";
 import Link from "next/link";
 import Image from "next/image";
 
-import contentImg from "../Images/Content.png";
+import loopIn from "../Images/loopIn.png";
 
 function Footer(){
   return(
@@ -61,7 +61,7 @@ export default function Register() {
     <>
     <div className=" w-screen relative  bg-gray-100 flex justify-between">
       <div className="mx-30 mt-30">
-      <Image src={contentImg} alt={"image"} width={500} height={250} />
+      <Image src={loopIn} alt={"image"} width={500} height={250} />
       </div>
     <div className=" bg-white p-15 mx-30 my-10 w-xl">
     <h1 className="text-3xl font-bold mb-4 m flex justify-center ">Get Started</h1>
