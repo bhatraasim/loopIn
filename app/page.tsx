@@ -8,6 +8,7 @@ import VideoUploadForm from "./components/VideoUpload";
 import PeopleYouMightKnow from "./components/PeopleYouMightKnow";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import Head from "next/head";
 
 export default function Home() {
   const [videos, setVideos] = useState<IVideo[]>([])
@@ -48,7 +49,10 @@ export default function Home() {
 
   
   return (
-    <div className="bg-[url('/bg-main.png')] bg-cover bg-center bg-fixed min-h-screen">
+  <>
+  
+  
+  <div className="bg-[url('/bg-main.png')] bg-cover bg-center bg-fixed min-h-screen">
       <div className="max-w-6xl mx-auto px-4 py-8 my-10">
         <div className="grid grid-cols-12 gap-6">
           {/* Main Content Area */}
@@ -77,5 +81,7 @@ export default function Home() {
         </div>
       </div>
     </div>
+  </>
+    
   );
 }
