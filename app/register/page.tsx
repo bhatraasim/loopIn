@@ -55,7 +55,7 @@ export default function Register() {
     <>
       <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#e2e2e2] to-[#ffffff] px-4">
         <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl">
-          <h1 className="text-3xl font-light text-center mb-6 text-gray-800">
+          <h1 className="text-3xl font-semibold text-center mb-6 text-gray-800">
             Create your account
           </h1>
           <form onSubmit={handleSubmit} className="space-y-4">
