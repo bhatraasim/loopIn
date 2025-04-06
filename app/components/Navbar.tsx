@@ -1,10 +1,10 @@
 "use client"
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import ThemeToggle from "./Mode_Button";
-import { Bell, Bookmark, Search } from "lucide-react";
+import { Bookmark,Search } from "lucide-react";
 import Profile from "./Profile";
 import BellNotification from "./BellNotification";
 
