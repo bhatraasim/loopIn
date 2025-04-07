@@ -41,8 +41,14 @@ export default function Register() {
         throw new Error(data.error || "Registration failed");
       }
 
-      showNotification("Registration successful! Please log in.", "success");
-      router.push("/login");
+      showNotification(
+        "Registration initiated. Please check your email to verify your account.",
+        "info"
+      );
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+
     } catch (error) {
       showNotification(
         error instanceof Error ? error.message : "Registration failed",

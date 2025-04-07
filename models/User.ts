@@ -4,6 +4,7 @@ import bcrypt from "bcryptjs";
 export interface IUser {
     email:string;
     password:string ;
+    verified:boolean;
     _id?:mongoose.Types.ObjectId;
     createdAt:Date;
     updatedAt:Date;
@@ -12,7 +13,8 @@ export interface IUser {
 const userSchema = new Schema<IUser>(
     {
         email:{type:String ,required:true,unique:true },
-        password:{type:String ,required:true }
+        password:{type:String ,required:true },
+        verified:{type:Boolean, default:false }
     },
     {
         timestamps:true
