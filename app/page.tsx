@@ -8,7 +8,6 @@ import VideoUploadForm from "./components/VideoUpload";
 import PeopleYouMightKnow from "./components/PeopleYouMightKnow";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import Head from "next/head";
 
 export default function Home() {
   const [videos, setVideos] = useState<IVideo[]>([])

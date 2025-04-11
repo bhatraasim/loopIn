@@ -1,3 +1,4 @@
+import { IComment } from "@/models/Comment";
 import { IUser } from "@/models/User";
 import { IVideo } from "@/models/Video";
 
@@ -52,6 +53,18 @@ class ApiClient {
             method:'POST',
             body: JSON.stringify({ oldPassword, newPassword }),
         })
+    }
+    async comment(videoId: string , text: string){
+        return this.fetch<IComment>('/api/users/comments' , {
+            method:'POST',
+            body:JSON.stringify({videoId , text})
+        })
+    }
+    async getComments(videoId: string): Promise<IComment[]> {
+        return this.fetch<IComment[]>(`/api/users/comments?videoId=${videoId}`,{
+            method:'GET'
+        });
+
     }
 }
 
