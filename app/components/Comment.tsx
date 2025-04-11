@@ -14,13 +14,13 @@ export default function Comment({ videoId }: { videoId: string }) {
     useEffect(() => {
         const fetchComments = async (videoId: string) => {
             try {
-                console.log("Fetching comments for videoId:", videoId);
+
                 if (!videoId) {
                     console.error("VideoId is missing or empty");
                     return;
                 }
                 const data = await apiClient.getComments(videoId);
-                console.log("Received comments data:", data);
+
                 setComments(data)
             } catch (error) {
                 console.error("Error fetching comments:", error);

@@ -4,6 +4,7 @@ import Comment from "./Comment";
 import { useState } from "react";
 import { BiCommentAdd } from "react-icons/bi";
 import { Bookmark, MessageSquareDiff, ThumbsUp } from "lucide-react";
+import { apiClient } from "@/lib/api-client";
 
 interface VideoComponentProps {
   video: IVideo;
@@ -26,14 +27,26 @@ const comments = [
     replies: [],
   },
 ];
-  
+
 
 
 
 export default function VideoComponent({ video }: VideoComponentProps) {
-  
+
   const [commentOpen, setCommentOpen] = useState(false)
   const [commentData, setCommentData] = useState(comments)
+  const [liked, setLiked] = useState<Boolean>(false)
+  const [likeCount, setLikeCount] = useState<number>(0)
+
+  const toggleLike = async () => {
+    try {
+      const data = await apiClient.Like(video._id?.toString() || "")
+      setLiked(data.liked);
+      setLikeCount(Number(data.likeCount));
+    } catch (error: any) {
+      console.error("Error liking video:", error);
+    }
+  }
   return (
     // <Link href={`/video/${video._id}`} className="block">
     <div className="card bg-base-100 shadow hover:shadow-lg transition-all duration-300 m-5 p-5">
@@ -51,7 +64,11 @@ export default function VideoComponent({ video }: VideoComponentProps) {
       </div>
       <hr className="my-3" />
       <div className=" flex items-center justify-between font-bold mt-3 mx-5">
-        <div className="flex items-center gap-2 p-4 rounded-2xl hover:bg-gray-200 ">Like <ThumbsUp /> </div>
+        <div className="flex items-center gap-2 p-4 rounded-2xl hover:bg-gray-200 ">
+          <button onClick={toggleLike} className="flex items-center gap-1">
+            {liked ? "Liked" : "Like"} <ThumbsUp />  <div className="">{likeCount}</div> 
+          </button>
+        </div>
         <div className="flex items-center gap-2 p-4 rounded-2xl hover:bg-gray-200">
           <button className="flex items-center gap-4" onClick={() => setCommentOpen(!commentOpen)}>
             Comment <MessageSquareDiff />
@@ -61,11 +78,11 @@ export default function VideoComponent({ video }: VideoComponentProps) {
         </div>
         <div className="flex items-center gap-2 p-4 rounded-2xl hover:bg-gray-200 ">Save <Bookmark /></div>
       </div>
-      {commentOpen && video._id &&  (
-  <div className=" fel justify-center ">
-      <Comment videoId={video._id?.toString() || "" } />
-  </div>
-)}
+      {commentOpen && video._id && (
+        <div className=" fel justify-center ">
+          <Comment videoId={video._id?.toString() || ""} />
+        </div>
+      )}
     </div>
     // </Link>
   );

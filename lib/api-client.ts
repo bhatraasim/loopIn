@@ -1,4 +1,5 @@
 import { IComment } from "@/models/Comment";
+import { ILike } from "@/models/Like";
 import { IUser } from "@/models/User";
 import { IVideo } from "@/models/Video";
 
@@ -45,7 +46,7 @@ class ApiClient {
     }
 
     async getAVideo(id: string) {
-        return this.fetch<IVideo>(`/videos/${id}`);
+        return this.fetch<IVideo>(`api/videos/${id}`);
     }
 
     async  changePassword(oldPassword:string , newPassword:string): Promise<{message:string}>{
@@ -65,6 +66,12 @@ class ApiClient {
             method:'GET'
         });
 
+    }
+    async Like(videoId:string ):Promise<{liked:Boolean , likeCount:Number}> {
+        return this.fetch<{ liked: boolean; likeCount: number }>('/api/like',{
+            method:"POST",
+            body:JSON.stringify({videoId})
+        })
     }
 }
 

@@ -5,18 +5,20 @@ export const VIDEO_DIMENSIONS = {
     height: 1920,
 } as const;
 
-export interface IVideo  {
+export interface IVideo extends mongoose.Document {
     _id?: mongoose.Types.ObjectId;
     title: string;
     description: string;
     videoUrl: string;
     thumbnailUrl?: string;
+    like:number;
     controls?:boolean;
     transformation?:{
         height:number,
         width:number
         quality:number
-    }
+    };
+    
 }
 
 const videoSchema = new Schema<IVideo>({
@@ -24,12 +26,14 @@ const videoSchema = new Schema<IVideo>({
     description: { type: String, required: true },
     videoUrl: { type: String, required: true },
     thumbnailUrl: { type: String, required: true },
+    like:{type:Number, required: true  , default:0 },
     controls: { type: Boolean, default: true },
     transformation: {
         height: { type: Number, default: VIDEO_DIMENSIONS.height },
         width: { type: Number, default: VIDEO_DIMENSIONS.width },
         quality: { type: Number, min: 1, max: 100 }
-    }
+    },
+    
 },{
     timestamps:true
 });
