@@ -7,6 +7,7 @@ import ThemeToggle from "./Mode_Button";
 import { Bookmark,Search } from "lucide-react";
 import Profile from "./Profile";
 import BellNotification from "./BellNotification";
+import ChatDrawer from "./ChatDrawer";
 
 const Navbar = () => {
   const { data: session } = useSession();
@@ -50,6 +51,9 @@ const Navbar = () => {
             </div>
             <div className="p-2  hover:bg-blue-50 rounded-full">
               <BellNotification />
+            </div>
+            <div className="p-2  hover:bg-blue-50 rounded-full">
+              <ChatDrawer  />
             </div>
             <div className="ml-2">
               <Profile />
