@@ -3,9 +3,10 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link";
-
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -18,12 +19,18 @@ const Login = () => {
     const res = await signIn("credentials", {
       email,
       password,
+      redirect:true
     });
 
     if (res?.error) {
       setError("Invalid email or password");
       return;
     }
+
+    if (res?.url) {
+      router.push(res.url);
+    }
+
 
   };
 
