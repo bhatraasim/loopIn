@@ -7,7 +7,8 @@ import Feed from "./components/Feed";
 import VideoUploadForm from "./components/VideoUpload";
 import PeopleYouMightKnow from "./components/PeopleYouMightKnow";
 import { useSession } from "next-auth/react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation"
+
 
 // Add this CSS to your global.css or a new stylesheet
 const darkModeStyles = `
@@ -22,8 +23,21 @@ const darkModeStyles = `
 `;
 
 export default function Home() {
-
   const router = useRouter()
+  const [videos, setVideos] = useState<IVideo[]>([]);
+  useEffect(() => {
+    const fetchVideos = async () => {
+      try {
+        const data = await apiClient.getVideos();
+        setVideos(data);
+      } catch (error) {
+        console.error("Failed to get videos:", error);
+      }
+    };
+    fetchVideos();
+  }, []);
+
+
 
   const { data: session, status } = useSession({
     required: true,
@@ -38,20 +52,6 @@ if (!session) {
   router.push("/login")
   return null
 }
-
-  const [videos, setVideos] = useState<IVideo[]>([]);
-
-  useEffect(() => {
-    const fetchVideos = async () => {
-      try {
-        const data = await apiClient.getVideos();
-        setVideos(data);
-      } catch (error) {
-        console.error("Failed to get videos:", error);
-      }
-    };
-    fetchVideos();
-  }, []);
 
   return (
     <>
