@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNotification } from "./Notification";
@@ -5,19 +7,18 @@ import { IKUploadResponse } from "imagekitio-next/dist/types/components/IKUpload
 import { apiClient } from "@/lib/api-client";
 import { Loader2, PersonStanding, Video } from "lucide-react";
 import FileUpload from "./FileUpload";
-import Image from "next/image";
 
 interface VideoFormData {
-    title: string
-    description: string
-    videoUrl: string
-    thumbnailUrl: string
+    title: string;
+    description: string;
+    videoUrl: string;
+    thumbnailUrl: string;
 }
 
 export default function VideoUploadForm() {
-    const [loading, setLoading] = useState(false)
-    const [uploadProgress, setUploadProgress] = useState(0)
-    const { showNotification } = useNotification()
+    const [loading, setLoading] = useState(false);
+    const [uploadProgress, setUploadProgress] = useState(0);
+    const { showNotification } = useNotification();
 
     const { register, handleSubmit, setValue, formState: { errors } } = useForm<VideoFormData>({
         defaultValues: {
@@ -25,31 +26,29 @@ export default function VideoUploadForm() {
             description: "",
             videoUrl: "",
             thumbnailUrl: "",
-        }
-    })
+        },
+    });
 
     const handleUploadSuccess = (response: IKUploadResponse) => {
         const videoUrl = response.url;
         const thumbnailUrl = response.thumbnailUrl || response.url;
-        
-        if (!videoUrl.startsWith('http')) {
-            setValue("videoUrl", `https://ik.imagekit.io/${process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY}/${videoUrl}`);
-        } else {
-            setValue("videoUrl", videoUrl);
-        }
-        
-        if (!thumbnailUrl.startsWith('http')) {
-            setValue("thumbnailUrl", `https://ik.imagekit.io/${process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY}/${thumbnailUrl}`);
-        } else {
-            setValue("thumbnailUrl", thumbnailUrl);
-        }
-        
-        showNotification("Video uploaded successfully", "success")
-    }
+
+        setValue("videoUrl", videoUrl.startsWith("http")
+            ? videoUrl
+            : `https://ik.imagekit.io/${process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY}/${videoUrl}`
+        );
+
+        setValue("thumbnailUrl", thumbnailUrl.startsWith("http")
+            ? thumbnailUrl
+            : `https://ik.imagekit.io/${process.env.NEXT_PUBLIC_IMAGEKIT_PUBLIC_KEY}/${thumbnailUrl}`
+        );
+
+        showNotification("Video uploaded successfully", "success");
+    };
 
     const handleProgress = (progress: number) => {
-        setUploadProgress(progress)
-    }
+        setUploadProgress(progress);
+    };
 
     const onSubmit = async (data: VideoFormData) => {
         if (!data.videoUrl) {
@@ -57,9 +56,9 @@ export default function VideoUploadForm() {
             return;
         }
 
-        setLoading(true)
+        setLoading(true);
         try {
-            await apiClient.createVideo(data)
+            await apiClient.createVideo(data);
             showNotification("Video published successfully!", "success");
             setValue("title", "");
             setValue("description", "");
@@ -69,25 +68,24 @@ export default function VideoUploadForm() {
         } catch (error) {
             showNotification(error instanceof Error ? error.message : "Failed to publish video", "error");
         } finally {
-            setLoading(false)
+            setLoading(false);
         }
-    }
+    };
 
     return (
-        <div className="bg-white rounded-xl p-4  w-max mx-auto">
+        <div className="bg-base-100 rounded-xl p-4 w-max mx-auto shadow">
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* Header with profile picture and input */}
                 <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0">
-                        <PersonStanding />
+                    <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-neutral text-neutral-content flex items-center justify-center">
+                        <PersonStanding className="w-5 h-5" />
                     </div>
                     <div className="flex-grow">
                         <input
                             type="text"
                             placeholder="What's on your mind?"
-                            className={`w-full px-4 py-2 bg-gray-100 rounded-full focus:outline-none focus:ring-2 focus:ring-primary/20 ${
-                                errors.title ? "border-error" : ""
-                            }`}
+                            className={`input input-bordered w-full rounded-full ${errors.title ? "input-error" : ""
+                                }`}
                             {...register("title", { required: "Title is required" })}
                         />
                         {errors.title && (
@@ -97,9 +95,8 @@ export default function VideoUploadForm() {
                         )}
                         <input
                             placeholder="Description (optional)"
-                            className={`mt-3 w-full px-4 py-2 bg-gray-100 rounded-3xl focus:outline-none focus:ring-2 focus:ring-primary/20  ${
-                                errors.description ? "border-error" : ""
-                            }`}
+                            className={`mt-3 input input-bordered w-full rounded-3xl ${errors.description ? "input-error" : ""
+                                }`}
                             {...register("description", { required: "Description is required" })}
                         />
                         {errors.description && (
@@ -111,30 +108,28 @@ export default function VideoUploadForm() {
                 </div>
 
                 {/* Upload area */}
-                <div className="border border-gray-200 rounded-lg p-4 mt-4">
+                <div className="border border-base-200 rounded-lg p-4 mt-4">
                     <FileUpload
                         fileType="video"
                         onSuccess={handleUploadSuccess}
                         onProgress={handleProgress}
                     />
                     {uploadProgress > 0 && (
-                        <div className="w-full bg-gray-100 rounded-full h-1.5 mt-4">
-                            <div
-                                className="bg-[#1C836D]  h-1.5 rounded-full transition-all duration-300"
-                                style={{ width: `${uploadProgress}%` }}
-                            />
-                        </div>
+                        <progress
+                            className="progress progress-primary w-full mt-4"
+                            value={uploadProgress}
+                            max="100"
+                        />
                     )}
                 </div>
 
                 {/* Submit button */}
                 <button
                     type="submit"
-                    className={`w-full py-2 px-4 rounded-lg font-medium text-white bg-[#1C836D] ${
-                        loading || uploadProgress < 100
-                            ? "bg-[#1C836D]  cursor-not-allowed"
-                            : "bg-[#1C836D]  hover:bg-primary/90"
-                    }`}
+                    className={`w-full py-2 px-4 rounded-lg font-medium text-white ${loading || uploadProgress < 100
+                            ? "bg-[#1C836D] opacity-90 cursor-not-allowed"
+                            : "bg-[#1C836D] hover:opacity-90"
+                        }`}
                     disabled={loading || uploadProgress < 100}
                 >
                     {loading ? (
