@@ -1,7 +1,6 @@
 import withAuth from "next-auth/middleware";
-import { matchesMiddleware } from "next/dist/shared/lib/router/router";
 import { NextResponse } from "next/server";
-import path from "path";
+
 
 
 export default withAuth(

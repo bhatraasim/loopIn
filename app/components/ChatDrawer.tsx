@@ -1,9 +1,42 @@
 "use client";
 import { MessageCircle, X } from 'lucide-react';
-import React from 'react';
+import React, { useEffect } from 'react';
 import AllUsersChat from './AllUsersChat';
+import { initSocket } from '@/lib/socket';
+import { useSession } from 'next-auth/react';
 
 function ChatDrawer() {
+  const { data: session } = useSession();
+
+  
+  useEffect(() => {
+
+    // Only initialize if user is authenticated
+    if(session?.user.id){
+
+    const socket = initSocket()
+
+    socket.on('connect',()=>{
+
+      console.log("socket is connect ")
+
+       //register the user 
+       socket.emit('register', session.user.id);
+    })
+
+    // socket.on('private-message', (data) => {
+    //   console.log('Received private message:', data.message);
+    //   // TODO: Update chat UI to show incoming message
+    // });
+
+    return () => {
+      socket.off('connect');
+      // We don't disconnect here to allow background notifications
+    };
+
+  }
+  }, [])
+  
   return (
     <>
       <div className="drawer drawer-end z-50">

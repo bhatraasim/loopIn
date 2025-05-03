@@ -2,14 +2,17 @@
   "name": "loopin",
   "version": "0.1.0",
   "private": true,
+   "type": "module",
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "concurrently \"next dev --turbo\" \"ts-node server.ts\"",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
   },
   "dependencies": {
     "bcryptjs": "^3.0.2",
+    "express": "^5.1.0",
+    "exxpress": "^1.0.0",
     "imagekit": "^6.0.0",
     "imagekitio-next": "^1.0.1",
     "lucide-react": "^0.479.0",
@@ -27,13 +30,16 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.0.14",
-    "@types/node": "^20",
+    "@types/express": "^5.0.1",
+    "@types/node": "^20.17.30",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "concurrently": "^9.1.2",
     "daisyui": "^5.0.4",
     "eslint": "^9",
     "eslint-config-next": "15.2.2",
     "tailwindcss": "^4.0.14",
-    "typescript": "^5"
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
   }
 }
