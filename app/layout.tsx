@@ -4,7 +4,7 @@ import "./globals.css";
 import Providers from "./components/Providers";
 import Navbar from "./components/Navbar";
 import { Inter } from "next/font/google";
-
+import { Analytics } from "@vercel/analytics/react"
 const inter = Inter({ subsets: ["latin"] });
 
 
@@ -36,7 +36,10 @@ export default function RootLayout({
       >
         <Providers>
           <Navbar />
-          <main className="" >{children}</main>
+          <main className="" >
+            {children}
+            <Analytics />
+            </main>
         </Providers>
         
       </body>
