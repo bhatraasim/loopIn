@@ -2,7 +2,6 @@ import Link from "next/link";
 import { IVideo } from "@/models/Video";
 import Comment from "./Comment";
 import { useState } from "react";
-import { BiCommentAdd } from "react-icons/bi";
 import { Bookmark, MessageSquareDiff, ThumbsUp } from "lucide-react";
 import { apiClient } from "@/lib/api-client";
 
