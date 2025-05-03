@@ -3,8 +3,10 @@
 import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 const Login = () => {
+  const router = useRouter()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -17,8 +19,7 @@ const Login = () => {
     const res = await signIn("credentials", {
       email,
       password,
-      redirect: true,
-      callbackUrl: "/", 
+      redirect:false
     });
 
     if (res?.error) {
@@ -26,6 +27,7 @@ const Login = () => {
       return;
     }
 
+    router.push("https://loop-8278y4x9o-raasims-projects.vercel.app/"); 
 
   };
 
