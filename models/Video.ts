@@ -17,7 +17,10 @@ export interface IVideo extends mongoose.Document {
         height:number,
         width:number
         quality:number
-    };
+    },
+    userId: Schema.Types.ObjectId,
+    email:string
+
     
 }
 
@@ -33,6 +36,9 @@ const videoSchema = new Schema<IVideo>({
         width: { type: Number, default: VIDEO_DIMENSIONS.width },
         quality: { type: Number, min: 1, max: 100 }
     },
+    userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
+    email: { type: String, required: true } 
+
     
 },{
     timestamps:true

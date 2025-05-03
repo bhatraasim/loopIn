@@ -27,6 +27,8 @@ export async function POST(request: NextRequest) {
         if (!token) {
             return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
         }
+        const userId =  token.id || token.sub;
+        const email = token.name || token.email || 'Unknown User';
 
         await connectToDatabase();
         console.log("Database connected successfully");
@@ -55,6 +57,8 @@ export async function POST(request: NextRequest) {
         // Create new video with default values
         const videoData = {
             ...body,
+            userId: userId,
+            email:email,
             controls: body.controls ?? true,
             transformation: {
                 height: 1920,

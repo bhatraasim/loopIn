@@ -77,8 +77,8 @@ export default function VideoUploadForm() {
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
                 {/* Header with profile picture and input */}
                 <div className="flex items-start gap-3">
-                    <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-neutral text-neutral-content flex items-center justify-center">
-                        <PersonStanding className="w-5 h-5" />
+                    <div className="w-10 h-10 rounded-full overflow-hidden flex-shrink-0 bg-[#2A7F68] text-neutral-content flex items-center justify-center">
+                        <PersonStanding className="w-5 h-5 " />
                     </div>
                     <div className="flex-grow">
                         <input

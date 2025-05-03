@@ -1,7 +1,7 @@
-import Link from "next/link";
+"use client"
 import { IVideo } from "@/models/Video";
 import Comment from "./Comment";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Bookmark, MessageSquareDiff, ThumbsUp } from "lucide-react";
 import { apiClient } from "@/lib/api-client";
 
@@ -27,7 +27,20 @@ const comments = [
   },
 ];
 
+function getInitials(email: string | undefined) {
+  if (!email) return ""
+  return email
+    .split("@")[0]
+    .split(" ")
+    .map((word) => word[0])
+    .join("")
+    .toUpperCase()
+}
 
+function getUsernameFromEmail(email: string | undefined) {
+  if (!email) return "";
+  return email.split("@")[0];
+}
 
 
 export default function VideoComponent({ video }: VideoComponentProps) {
@@ -37,18 +50,50 @@ export default function VideoComponent({ video }: VideoComponentProps) {
   const [liked, setLiked] = useState<Boolean>(false)
   const [likeCount, setLikeCount] = useState<number>(0)
 
+ 
+  // useEffect(() => {
+  //   const fetchInitialLikeStatus = async () => {
+  //     try {
+  //       const data = await apiClient.Like(video._id?.toString() || "");
+  //       setLiked(data.liked);
+  //       setLikeCount(Number(data.likeCount)); // Update likeCount
+  //     } catch (error) {
+  //       console.error("Error fetching initial like status:", error);
+  //     }
+  //   };
+
+  //   fetchInitialLikeStatus();
+  // }, [video._id]);
+  
+
   const toggleLike = async () => {
     try {
       const data = await apiClient.Like(video._id?.toString() || "")
-      setLiked(data.liked);
+      setLiked(data.liked)
       setLikeCount(Number(data.likeCount));
     } catch (error: any) {
       console.error("Error liking video:", error);
     }
   }
+
+
+  const initials = getInitials(video.email);
+  const username = getUsernameFromEmail(video.email);
+
   return (
     // <Link href={`/video/${video._id}`} className="block">
     <div className="card bg-base-100 shadow hover:shadow-lg transition-all duration-300 m-5 p-5">
+      <div className="flex items-center mb-4">
+        <div className="flex-shrink-0">
+          <div className="w-12 h-12 rounded-full bg-[#2A7F68] flex items-center justify-center text-white font-bold">
+            {initials}
+          </div>
+        </div>
+        <div className="ml-4">
+          <h3 className="text-lg font-medium ">{username}</h3>
+          <p className="text-sm text-gray-500">{video.email}</p>
+        </div>
+      </div>
       <div className="relative w-full" style={{ aspectRatio: "16/9" }}>
         <video
           src={video.videoUrl}
