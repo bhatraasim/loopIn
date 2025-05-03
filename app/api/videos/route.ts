@@ -25,7 +25,7 @@ export async function POST(request: NextRequest) {
         const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET });
 
         if (!token) {
-            return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+            return NextResponse.json({error: "Unauthorized" }, {status: 401 });
         }
         const userId =  token.id || token.sub;
         const email = token.name || token.email || 'Unknown User';
