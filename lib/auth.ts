@@ -13,7 +13,7 @@ export const authOptions:NextAuthOptions = {
             name:"Credentials",
             credentials:{
                 email:{label:"Email" , type:"text"},
-                password:{label:"Password" , type:"pasword"}
+                password:{label:"Password" , type:"password"}
             },
             async authorize(credentials){
                 if (!credentials?.email || !credentials?.password ){
@@ -23,17 +23,14 @@ export const authOptions:NextAuthOptions = {
                 try {
                     await connectToDatabase()
                     const user = await User.findOne({email:credentials.email})
-                    if (!user) {
-                        throw new Error("User not found ")
-                    }
+                    if (!user) return null
 
                     const isValid= await bcrypt.compare(
                         credentials.password,
                         user.password
                     )
-                    if (!isValid) {
-                        throw new Error("password incorect")
-                    }
+                    if (!isValid) return null;
+                    
                     return {
                         id:user._id.toString(),
                         email:user.email

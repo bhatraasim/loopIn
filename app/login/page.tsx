@@ -27,7 +27,7 @@ const Login = () => {
       return;
     }
 
-    router.push("https://loop-8278y4x9o-raasims-projects.vercel.app/"); 
+    router.push("/"); 
 
   };
 
