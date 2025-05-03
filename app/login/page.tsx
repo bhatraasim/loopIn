@@ -26,8 +26,6 @@ const Login = () => {
       return;
     }
 
-    router.push("/"); 
-
   };
 
   return (
