@@ -75,7 +75,7 @@ const Navbar = () => {
           <>
             <ThemeToggle />
             <Link href="/login">
-              <button className="btn btn-primary">Login</button>
+              <button className="btn bg-[#1C836D] text-white">Login</button>
             </Link>
           </>
         )}

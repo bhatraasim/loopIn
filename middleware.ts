@@ -21,14 +21,14 @@ export default withAuth(
                     return true 
                 }
 
-                //public routes
-                if (
-                    pathname === "/" || 
-                    pathname.startsWith("/api/videos") ||
-                    pathname.startsWith("/api/users")
-                ) {
-                    return true;
-                }
+                // //public routes
+                // if (
+                //     pathname === "/" || 
+                //     pathname.startsWith("/api/videos") ||
+                //     pathname.startsWith("/api/users")
+                // ) {
+                //     return true;
+                // }
 
                 return !!token
             }

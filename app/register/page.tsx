@@ -7,7 +7,7 @@ import Link from "next/link";
 
 function Footer() {
   return (
-    <footer className="text-center text-gray-500 text-sm py-6">
+    <footer className="text-center text-base-content/70 text-sm py-6">
       © 2025 LoopIn. All rights reserved.
     </footer>
   );
@@ -53,9 +53,9 @@ export default function Register() {
 
   return (
     <>
-      <div className="min-h-screen flex items-center justify-center bg-gradient-to-r from-[#e2e2e2] to-[#ffffff] px-4">
-        <div className="w-full max-w-md bg-white p-8 rounded-2xl shadow-xl">
-          <h1 className="text-3xl font-light text-center mb-6 text-gray-800">
+      <div className="min-h-screen flex items-center justify-center bg-base-200 px-4">
+        <div className="w-full max-w-md bg-base-100 p-8 rounded-2xl shadow-xl">
+          <h1 className="text-3xl font-light text-center mb-6 text-base-content">
             Create your account
           </h1>
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -65,7 +65,7 @@ export default function Register() {
               placeholder="Email"
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C836D] transition"
+              className="input input-bordered w-full"
             />
             <input
               type="password"
@@ -73,7 +73,7 @@ export default function Register() {
               placeholder="Password"
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C836D] transition"
+              className="input input-bordered w-full"
             />
             <input
               type="password"
@@ -81,17 +81,20 @@ export default function Register() {
               placeholder="Confirm Password"
               onChange={(e) => setConfirmPassword(e.target.value)}
               required
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#1C836D] transition"
+              className="input input-bordered w-full"
             />
             <button
               type="submit"
-              className="w-full bg-[#1C836D] hover:bg-[#0BAACA] text-white font-medium py-2 rounded-lg transition duration-300"
+              className="btn bg-[#1C836D] w-full"
             >
               Register
             </button>
-            <p className="text-center text-sm text-gray-600 mt-4">
+            <p className="text-center text-sm text-base-content/70 mt-4">
               Already have an account?{" "}
-              <Link href="/login" className="text-[#1C836D] hover:underline">
+              <Link
+                href="/login"
+                className="link text-[#1C836D]"
+              >
                 Login
               </Link>
             </p>
