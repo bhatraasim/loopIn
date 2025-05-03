@@ -4,6 +4,7 @@ import Comment from "@/models/Comment";
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import mongoose from "mongoose";
+import { console } from "inspector";
 
 export async function POST(req: NextRequest) {
   try {
@@ -29,8 +30,9 @@ export async function POST(req: NextRequest) {
     });
 
     return NextResponse.json(comment, { status: 201 });
-  } catch (error) {
+  } catch (error:unknown) {
     console.error("Error posting comment:");
+    console.log(error)
     return NextResponse.json(
       { message: "Internal server error" },
       { status: 500 }
@@ -53,8 +55,9 @@ export async function GET(req: NextRequest) {
     const comments = await Comment.find({ videoId }).sort({ createdAt: -1 });
 
     return NextResponse.json(comments, { status: 200 });
-  } catch (error) {
+  } catch (error:unknown) {
     console.error("Error fetching comments:");
+    console.log(error)
     return NextResponse.json(
       { message: "Error fetching comments" },
       { status: 500 }

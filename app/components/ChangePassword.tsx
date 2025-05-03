@@ -44,8 +44,9 @@ const BlurredCard: React.FC<BlurredCardProps> = ({ title, onClose }) => {
       const res = await apiClient.changePassword(oldPassInout.trim(), newPassInput.trim())
       showNotification(res.message || "Password changed", "success")
       onClose()
-    } catch (error: any) {
-      showNotification(error.message || "Something went wrong", "error")
+    } catch (error: unknown) {
+      console.log(error)
+      showNotification( "Something went wrong", "error")
     } finally {
       setLoading(false)
     }

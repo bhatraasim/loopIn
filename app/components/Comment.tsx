@@ -1,6 +1,5 @@
 "use client"
 import { apiClient } from '@/lib/api-client'
-import { connectToDatabase } from '@/lib/db'
 import { IComment } from '@/models/Comment'
 import React, { useEffect, useState } from 'react'
 

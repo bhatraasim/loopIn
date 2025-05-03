@@ -1,14 +1,14 @@
 import { IComment } from "@/models/Comment";
-import { ILike } from "@/models/Like";
 import { IUser } from "@/models/User";
 import { IVideo } from "@/models/Video";
 
-export type VideoFormData = Omit<IVideo, "_id">;
-type FetchOptions = {
-    method?: "GET" | "POST" | "PUT" | "DELETE";
-    body?: any;
-    headers?: Record<string, string>;
-}
+export type VideoFormData = {
+    title: string;
+    description: string;
+    videoUrl: string;
+    thumbnailUrl: string;
+};
+
 
 class ApiClient {
     private async fetch<T>(url: string, options: RequestInit = {}): Promise<T> {
@@ -38,7 +38,7 @@ class ApiClient {
         return this.fetch<IVideo[]>('/api/videos');
     }
 
-    async createVideo(data: Omit<IVideo, '_id'>): Promise<IVideo> {
+    async createVideo(data: VideoFormData): Promise<IVideo> {
         return this.fetch<IVideo>('/api/videos', {
             method: 'POST',
             body: JSON.stringify(data),
@@ -67,7 +67,7 @@ class ApiClient {
         });
 
     }
-    async Like(videoId:string ):Promise<{liked:Boolean , likeCount:Number}> {
+    async Like(videoId:string ):Promise<{liked:boolean , likeCount:number}> {
         return this.fetch<{ liked: boolean; likeCount: number }>('/api/like',{
             method:"POST",
             body:JSON.stringify({videoId})

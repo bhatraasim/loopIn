@@ -71,18 +71,18 @@ export async function POST(request: NextRequest) {
             const newVideo = await Video.create(videoData);
             console.log("Video saved successfully:", newVideo);
             return NextResponse.json(newVideo, { status: 201 });
-        } catch (dbError: any) {
+        } catch (dbError: unknown) {
             console.error("Database error while creating video:", dbError);
             return NextResponse.json(
-                { error: `Database error: ${dbError.message}` },
+                { error: `Database error: ${dbError}` },
                 { status: 500 }
             );
         }
 
-    } catch (error: any) {
+    } catch (error: unknown) {
         console.error("Error in video creation process:", error);
         return NextResponse.json(
-            { error: `Server error: ${error.message}` },
+            { error: `Server error: ${error}` },
             { status: 500 }
         );
     }

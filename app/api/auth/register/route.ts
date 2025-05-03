@@ -31,9 +31,9 @@ export async function POST(request:NextRequest){
             {status:201}
         )
 
-    } catch (error) {
+    } catch (error:unknown) {
         return NextResponse.json(
-            {error:"Failed to create user "},
+            {error:error},
             {status:500}
         )
     }

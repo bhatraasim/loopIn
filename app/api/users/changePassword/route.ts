@@ -41,13 +41,13 @@ export async function POST(req: NextRequest) {
 
     
     user.password = newPassword;
-    const savedUser = await user.save();
+    await user.save();
 
     return NextResponse.json(
       { message: "Password updated successfully" },
       { status: 200 }
     );
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("Error changing password:", error);
     return NextResponse.json(
       { message: "Something went wrong. Please try again later." },

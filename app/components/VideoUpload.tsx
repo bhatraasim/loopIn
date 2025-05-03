@@ -1,5 +1,4 @@
 "use client";
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { useNotification } from "./Notification";
@@ -58,7 +57,7 @@ export default function VideoUploadForm() {
 
         setLoading(true);
         try {
-            await apiClient.createVideo(data);
+            await apiClient.createVideo(data );
             showNotification("Video published successfully!", "success");
             setValue("title", "");
             setValue("description", "");

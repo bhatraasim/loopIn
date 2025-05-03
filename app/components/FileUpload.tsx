@@ -2,7 +2,7 @@
 
 import React, { useState } from "react"
 import { IKUpload } from "imagekitio-next"
-import { Loader2, Upload, Video, AlertCircle } from "lucide-react"
+import { Loader2, Video, AlertCircle } from "lucide-react"
 import { IKUploadResponse } from "imagekitio-next/dist/types/components/IKUpload/props"
 
 interface FileUploadProps {

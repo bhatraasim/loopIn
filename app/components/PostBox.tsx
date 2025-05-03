@@ -1,5 +1,5 @@
-import Image from "next/image";
-import { Camera, Video, Calendar, Edit3, PersonStanding } from "lucide-react";
+
+import { Camera, Video, Calendar, PersonStanding } from "lucide-react";
 
 const PostBox = () => {
   return (

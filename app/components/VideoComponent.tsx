@@ -8,24 +8,6 @@ import { apiClient } from "@/lib/api-client";
 interface VideoComponentProps {
   video: IVideo;
 }
-const comments = [
-  {
-    id: 1,
-    name: "Alice",
-    replies: [
-      {
-        id: 2,
-        name: "Bob",
-        replies: [],
-      },
-    ],
-  },
-  {
-    id: 3,
-    name: "Charlie",
-    replies: [],
-  },
-];
 
 function getInitials(email: string | undefined) {
   if (!email) return ""
@@ -46,24 +28,23 @@ function getUsernameFromEmail(email: string | undefined) {
 export default function VideoComponent({ video }: VideoComponentProps) {
 
   const [commentOpen, setCommentOpen] = useState(false)
-  const [commentData, setCommentData] = useState(comments)
-  const [liked, setLiked] = useState<Boolean>(false)
+  const [liked, setLiked] = useState<boolean>(false)
   const [likeCount, setLikeCount] = useState<number>(0)
 
  
-  // useEffect(() => {
-  //   const fetchInitialLikeStatus = async () => {
-  //     try {
-  //       const data = await apiClient.Like(video._id?.toString() || "");
-  //       setLiked(data.liked);
-  //       setLikeCount(Number(data.likeCount)); // Update likeCount
-  //     } catch (error) {
-  //       console.error("Error fetching initial like status:", error);
-  //     }
-  //   };
+  useEffect(() => {
+    const fetchInitialLikeStatus = async () => {
+      try {
+        const data = await apiClient.Like(video._id?.toString() || "");
+        setLiked(data.liked);
+        setLikeCount(Number(data.likeCount)); // Update likeCount
+      } catch (error) {
+        console.error("Error fetching initial like status:", error);
+      }
+    };
 
-  //   fetchInitialLikeStatus();
-  // }, [video._id]);
+    fetchInitialLikeStatus();
+  }, [video._id]);
   
 
   const toggleLike = async () => {
@@ -71,7 +52,7 @@ export default function VideoComponent({ video }: VideoComponentProps) {
       const data = await apiClient.Like(video._id?.toString() || "")
       setLiked(data.liked)
       setLikeCount(Number(data.likeCount));
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error("Error liking video:", error);
     }
   }
@@ -109,16 +90,15 @@ export default function VideoComponent({ video }: VideoComponentProps) {
       <hr className="my-3" />
       <div className=" flex items-center justify-between font-bold mt-3 mx-5">
         <div className="flex items-center gap-2 p-4 rounded-2xl hover:bg-gray-200 ">
-          <button onClick={toggleLike} className="flex items-center gap-1">
-            {liked ? "Liked" : "Like"} <ThumbsUp />  <div className="">{likeCount}</div> 
+          <button onClick={toggleLike} className="flex items-center gap-1"> 
+            {liked ? "Liked" : "Like"} <ThumbsUp color={liked ? "red" : "black"}/>  {likeCount}
           </button>
         </div>
         <div className="flex items-center gap-2 p-4 rounded-2xl hover:bg-gray-200">
           <button className="flex items-center gap-4" onClick={() => setCommentOpen(!commentOpen)}>
             Comment <MessageSquareDiff />
-            <div className="">
-            </div>
           </button>
+        
         </div>
         <div className="flex items-center gap-2 p-4 rounded-2xl hover:bg-gray-200 ">Save <Bookmark /></div>
       </div>
