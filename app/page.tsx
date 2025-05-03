@@ -6,6 +6,8 @@ import Card_sm from "./components/Card-sm";
 import Feed from "./components/Feed";
 import VideoUploadForm from "./components/VideoUpload";
 import PeopleYouMightKnow from "./components/PeopleYouMightKnow";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 
 // Add this CSS to your global.css or a new stylesheet
 const darkModeStyles = `
@@ -20,6 +22,23 @@ const darkModeStyles = `
 `;
 
 export default function Home() {
+
+  const router = useRouter()
+
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      window.location.href = "/login"
+    },
+  })
+
+  if (status === "loading") return <p>Loading...</p>
+
+if (!session) {
+  router.push("/login")
+  return null
+}
+
   const [videos, setVideos] = useState<IVideo[]>([]);
 
   useEffect(() => {
