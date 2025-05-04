@@ -4,6 +4,7 @@ import React, { useState } from "react"
 import { IKUpload } from "imagekitio-next"
 import { Loader2, Video, AlertCircle } from "lucide-react"
 import { IKUploadResponse } from "imagekitio-next/dist/types/components/IKUpload/props"
+import { IKContext } from "imagekitio-react"
 
 interface FileUploadProps {
   onSuccess: (res: IKUploadResponse) => void
@@ -69,9 +70,12 @@ export default function FileUpload({
     return true
   }
 
+  const IUrl = process.env.NEXT_PUBLIC_URL_ENDPOINT
+  console.log(IUrl);
   return (
     <div className="space-y-3">
       <div className="relative">
+        <IKContext urlEndpoit={IUrl}>
         <IKUpload
           fileName={fileType === "video" ? "video" : "image"}
           useUniqueFileName={true}
@@ -83,6 +87,7 @@ export default function FileUpload({
           folder={fileType === "video" ? "/video" : "/image"}
           className="absolute inset-0 w-full h-full opacity-0 cursor-pointer"
         />
+        </IKContext>
 
         <div className="flex flex-col items-center justify-center p-6 border-2 border-dashed border-base-300 rounded-lg bg-base-200 hover:bg-base-300 transition-colors">
           {uploading ? (
