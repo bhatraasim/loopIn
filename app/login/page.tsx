@@ -50,7 +50,7 @@ const Login = () => {
        
         <button
           onClick={() => signIn("google")}
-          className="btn w-full border border-base-300 bg-white text-base-content hover:bg-gray-100 mb-4 flex items-center justify-center gap-2"
+          className="btn w-full border border-base-300 text-base-content hover:bg-[#1C836D] hover:text-white mb-4 flex items-center justify-center gap-2"
         >
           <FcGoogle className="text-xl" />
           Sign in with Google
@@ -86,7 +86,7 @@ const Login = () => {
 
           <button
             type="submit"
-            className="btn bg-[#1C836D] w-full"
+            className="btn bg-[#1C836D] text-white w-full"
           >
             Login
           </button>

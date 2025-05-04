@@ -4,6 +4,8 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useNotification } from "../components/Notification";
 import Link from "next/link";
+import { signIn } from "next-auth/react";
+import { FcGoogle } from "react-icons/fc";
 
 function Footer() {
   return (
@@ -58,6 +60,13 @@ export default function Register() {
           <h1 className="text-3xl font-light text-center mb-6 text-base-content">
             Create your account
           </h1>
+          <button
+                    onClick={() => signIn("google")}
+                    className="btn w-full border border-base-300 text-base-content hover:bg-[#1C836D] hover:text-white mb-4 flex items-center justify-center gap-2"
+                  >
+                    <FcGoogle className="text-xl" />
+                    Sign in with Google
+                  </button>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="email"
@@ -85,7 +94,7 @@ export default function Register() {
             />
             <button
               type="submit"
-              className="btn bg-[#1C836D] w-full"
+              className="btn bg-[#1C836D] text-white w-full"
             >
               Register
             </button>
