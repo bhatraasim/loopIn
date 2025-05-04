@@ -110,6 +110,7 @@ export default function VideoUploadForm() {
                 <div className="border border-base-200 rounded-lg p-4 mt-4">
                     <FileUpload
                         fileType="video"
+               
                         onSuccess={handleUploadSuccess}
                         onProgress={handleProgress}
                     />
