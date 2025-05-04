@@ -4,12 +4,14 @@ import { signIn } from "next-auth/react";
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
+import { FcGoogle } from "react-icons/fc";
 
 const Login = () => {
   const router = useRouter()
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  
 
 
 
@@ -19,7 +21,7 @@ const Login = () => {
     const res = await signIn("credentials", {
       email,
       password,
-      redirect:true
+      redirect: true
     });
 
     if (res?.error) {
@@ -45,6 +47,14 @@ const Login = () => {
           <p className="text-error text-center text-sm mb-4">{error}</p>
         )}
 
+       
+        <button
+          onClick={() => signIn("google")}
+          className="btn w-full border border-base-300 bg-white text-base-content hover:bg-gray-100 mb-4 flex items-center justify-center gap-2"
+        >
+          <FcGoogle className="text-xl" />
+          Sign in with Google
+        </button>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div>
             <label className="block text-sm font-medium text-base-content mb-1">
