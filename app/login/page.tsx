@@ -28,7 +28,7 @@ const Login = () => {
     }
 
     if (res?.url) {
-      router.push(res.url);
+      router.push("/");
     }
 
 
