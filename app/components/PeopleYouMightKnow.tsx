@@ -1,4 +1,5 @@
 "use client"
+
 import React, { useEffect, useState } from 'react'
 import { UserPlus } from 'lucide-react'
 import Link from 'next/link'
@@ -37,8 +38,10 @@ function PeopleYouMightKnow() {
   }, [])
 
   return (
-    <div className="card bg-base-100 shadow-md p-5 w-96 mt-20">
-      <h2 className="text-lg font-semibold mb-3 text-base-content">People you might know</h2>
+    <div className="card bg-base-100 shadow-md p-4 sm:p-5 w-full max-w-md mx-auto mt-10 sm:mt-20">
+      <h2 className="text-lg font-semibold mb-3 text-base-content">
+        People you might know
+      </h2>
 
       {loading ? (
         <div className="space-y-3 animate-pulse">
@@ -58,26 +61,35 @@ function PeopleYouMightKnow() {
         <p className="text-base-content/60">No users found</p>
       ) : (
         users.slice(4, 7).map((user) => (
-          <div key={user._id?.toString()} className="flex items-center justify-between border-b border-base-300 py-3 last:border-b-0">
+          <div
+            key={user._id?.toString()}
+            className="flex flex-col sm:flex-row sm:items-center justify-between border-b border-base-300 py-3 last:border-b-0 gap-3"
+          >
             <div className="flex items-center gap-3">
-              <div className="w-12 h-12 rounded-full bg-[#2A7F68]  flex items-center justify-center text-lg font-semibold text-white">
+              <div className="w-12 h-12 rounded-full bg-[#2A7F68] flex items-center justify-center text-lg font-semibold text-white">
                 {getInitials(user.email)}
               </div>
               <div>
-                <p className="font-semibold text-base-content">{user.email.split('@')[0]}</p>
+                <p className="font-semibold text-base-content">
+                  {user.email.split('@')[0]}
+                </p>
                 <p className="text-sm text-base-content/60">Member since</p>
-                <p className="text-sm text-base-content">{new Date(user.createdAt).toLocaleDateString()}</p>
+                <p className="text-sm text-base-content">
+                  {new Date(user.createdAt).toLocaleDateString()}
+                </p>
               </div>
             </div>
-            <button className="btn btn-sm btn-outline btn-primary">
-              <UserPlus size={16} /> Connect
-            </button>
+            <div className="sm:ml-auto">
+              <button className="btn btn-sm btn-outline btn-primary w-full sm:w-auto">
+                <UserPlus size={16} /> Connect
+              </button>
+            </div>
           </div>
         ))
       )}
 
       <div className="text-center mt-4">
-        <Link href="/network" className="text-[#2A7F68]  hover:underline">
+        <Link href="/network" className="text-[#2A7F68] hover:underline">
           View all recommendations →
         </Link>
       </div>
