@@ -12,21 +12,22 @@ export type VideoFormData = {
 
 class ApiClient {
     private async fetch<T>(url: string, options: RequestInit = {}): Promise<T> {
-        const response = await fetch(url, {
-            ...options,
-            headers: {
-                'Content-Type': 'application/json',
-                ...options.headers,
-            },
-        });
+  const response = await fetch(url, {
+    ...options,
+    headers: {
+      'Content-Type': 'application/json',
+      ...options.headers,
+    },
+  });
 
-        if (!response.ok) {
-            const errorText = await response.text();
-            throw new Error(errorText);
-        }
+  if (!response.ok) {
+    const errorText = await response.text();
+    console.error(`Fetch error on ${url}: ${response.status} - ${errorText}`);
+    throw new Error(errorText);
+  }
 
-        return response.json();
-    }
+  return response.json();
+}
 
     // User related API calls
     async getUsers(): Promise<IUser[]> {
