@@ -75,7 +75,7 @@ export default function FileUpload({
   return (
     <div className="space-y-3">
       <div className="relative">
-        <IKContext urlEndpoit={IUrl}>
+        <IKContext urlEndpoint={IUrl}>
         <IKUpload
           fileName={fileType === "video" ? "video" : "image"}
           useUniqueFileName={true}

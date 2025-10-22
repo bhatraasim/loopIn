@@ -77,10 +77,12 @@ function PeopleYouMightKnow() {
                 <p className="text-sm text-base-content">
                   {new Date(user.createdAt).toLocaleDateString()}
                 </p>
+
+              
               </div>
             </div>
             <div className="sm:ml-auto">
-              <button className="btn btn-sm btn-outline btn-primary w-full sm:w-auto">
+              <button className="btn btn-sm btn-outline bg-[#1C836D] text-white w-full sm:w-auto">
                 <UserPlus size={16} /> Connect
               </button>
             </div>

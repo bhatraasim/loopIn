@@ -36,13 +36,13 @@ export default function AllUsers() {
         fetchUsers();
     }, []);
 
-    const filteredUsers = users.filter(user => 
+    const filteredUsers = users.filter(user =>
         user.email.toLowerCase().includes(searchQuery.toLowerCase())
     );
 
     if (loading) {
         return (
-            <div className="container mx-auto px-4 py-8  mt-50">
+            <div className="container mx-auto px-4 py-8 mt-50">
                 <div className="animate-pulse space-y-6">
                     <div className="h-8 bg-gray-200 rounded w-1/4"></div>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -79,14 +79,14 @@ export default function AllUsers() {
             <div className="flex flex-col md:flex-row justify-between items-center mb-8">
                 <div className="flex items-center gap-3 mb-4 md:mb-0">
                     <Users className="w-8 h-8 text-[#2A7F68]" />
-                    <h1 className="text-2xl font-bold text-gray-800">All Users</h1>
+                    <h1 className="text-2xl font-bold ">All Users</h1>
                 </div>
                 <div className="relative w-full md:w-96">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 w-5 h-5" />
                     <input
                         type="text"
                         placeholder="Search users..."
-                        className="w-full pl-10 pr-4 py-2 border border-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#2A7F68] focus:border-transparent"
+                        className="input input-bordered w-full pl-10 pr-4 focus:outline-none focus:ring-2 focus:ring-[#2A7F68] focus:border-transparent"
                         value={searchQuery}
                         onChange={(e) => setSearchQuery(e.target.value)}
                     />
@@ -106,14 +106,14 @@ export default function AllUsers() {
                     {filteredUsers.map((user) => (
                         <div
                             key={user._id?.toString()}
-                            className="bg-white rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 p-6"
+                            className="card card-compact bg-base-100 shadow-md hover:shadow-lg transition-shadow duration-300"
                         >
-                            <div className="flex items-center gap-4">
-                                <div className="w-16 h-16 rounded-full bg-[#2A7F68] flex items-center justify-center text-2xl font-semibold text-white">
+                            <div className="card-body">
+                                <div className=" w-16 h-16 rounded-full bg-[#2A7F68] flex items-center justify-center text-2xl font-semibold text-white">
                                     {getInitials(user.email)}
                                 </div>
                                 <div className="flex-1">
-                                    <h3 className="font-semibold text-lg text-gray-800">
+                                    <h3 className="font-semibold text-lg ">
                                         {user.email.split('@')[0]}
                                     </h3>
                                     <p className="text-sm text-gray-500">
@@ -121,9 +121,9 @@ export default function AllUsers() {
                                     </p>
                                 </div>
                             </div>
-                            <div className="mt-4 flex justify-end">
-                                <button className="flex items-center gap-2 px-4 py-2 bg-[#2A7F68] text-white rounded-lg hover:bg-[#1C836D] transition-colors duration-300">
-                                    <UserPlus className="w-4 h-4" />
+                            <div className="card-actions justify-end m-6 ">
+                                <button className="btn btn-sm p-5 rounded-2xl bg-[#2A7F68] text-white hover:bg-[#1C836D] transition-colors duration-300">
+                                    <UserPlus className="w-4 h-4 " />
                                     <span>Connect</span>
                                 </button>
                             </div>
